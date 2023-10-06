@@ -1,6 +1,7 @@
 import {
     faHome,
     faShareNodes,
+    faGear
 } from '@fortawesome/free-solid-svg-icons';
   
 import { MenuItem } from '../types/MenuItem';
@@ -11,6 +12,13 @@ export const menuItems: MenuItem[] = [
     icon: faHome,
     subMenu: [
       { label: 'common.dashboard', route: '/', icon: false },
+    ],
+  },
+  {
+    label: 'common.settings',
+    icon: faGear,
+    subMenu: [
+      { label: 'common.apis', route: '/apiSettings', icon: false },
     ],
   },
   {
