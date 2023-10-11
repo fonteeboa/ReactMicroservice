@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse, AxiosError  } from 'axios';
 
 interface RequestOptions {
   method: string;
@@ -35,13 +35,13 @@ class HttpClient {
   }
 
 /**
- * Makes an asynchronous request and returns a promise that resolves to the response data.
+ * Makes an asynchronous request with the specified options.
  *
- * @param {RequestOptions} options - The options for the request.
- * @param {string} options.method - The HTTP method for the request.
- * @param {string} options.url - The URL for the request.
- * @param {any} options.data - The data to be sent with the request.
- * @param {Object} options.headers - The headers for the request.
+ * @param {RequestOptions} options - The request options.
+ * @param {string} options.method - The HTTP method.
+ * @param {string} options.url - The URL to make the request to.
+ * @param {Object} options.data - The data to send in the request.
+ * @param {Object} options.headers - The headers to include in the request.
  * @param {string} options.baseUrl - The base URL for the request.
  * @return {Promise<T>} A promise that resolves to the response data.
  */
@@ -52,20 +52,20 @@ class HttpClient {
     headers = {},
     baseUrl,
   }: RequestOptions): Promise<T> {
-    const axiosInstance = baseUrl ? new HttpClient(baseUrl) : this;
 
+    const axiosInstance = baseUrl ? new HttpClient(baseUrl) : this;
     axiosInstance.setHeaders(headers);
 
     try {
-      const response: AxiosResponse<T> = await axiosInstance.instance({
-        method,
-        url,
-        data,
-      });
-
+      const response: AxiosResponse<T> = await axiosInstance.instance({ method, url, data });
       return response.data;
     } catch (error) {
-      throw new Error(`Request failed: ${(error as Error).message}`);
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        return Promise.reject(axiosError.response.data);
+      } else {
+        return Promise.reject(`Request failed: ${axiosError.message}`);
+      }
     }
   }
 }
@@ -89,7 +89,6 @@ export const api = {
    * @returns {Promise<T>} - A promise that resolves to the response data.
    */
   request: async <T>(options: RequestOptions): Promise<T> => {
-    const httpClient = createHttpClient(options.baseUrl);
-    return httpClient.makeRequest<T>(options);
+    return createHttpClient(options.baseUrl).makeRequest<T>(options);
   },
 };

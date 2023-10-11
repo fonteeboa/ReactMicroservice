@@ -1,6 +1,7 @@
 import React from 'react';
 import { User, Mail, LockClosed, } from "heroicons-react";
 import { IInputField } from '../../types/base-components/inputField';
+import {Input} from 'antd';
 
 /**
  * Generates the input field component for forms.
@@ -17,7 +18,7 @@ import { IInputField } from '../../types/base-components/inputField';
  * @param {boolean} props.required - Indicates whether the input field is required.
  * @returns {React.ReactNode} - The rendered input field component.
  */
-export const InputField: React.FC<IInputField> = ({ name, type, icon, label, onChange, styles, register, mask, required, ...rest }) => {
+export const InputField: React.FC<IInputField> = ({ name, type, icon, label, onChange, styles, register, mask, required, className, ...rest }) => {
 
     /**
      * Retrieves the appropriate icon based on the provided type.
@@ -48,9 +49,13 @@ export const InputField: React.FC<IInputField> = ({ name, type, icon, label, onC
 
     return (
         <div style={type === 'hidden' ? { display: 'none' } : undefined }>
-            <label className="block capitalize tracking-wide text-gray-700 text-xs font-normal mb-2" htmlFor={name}><span>{label}{required && <label className="text-red-600 text-sm after:content-['_*']"></label>}</span></label>
+            <label className="block capitalize tracking-wide text-gray-700 text-xs font-normal mb-2" htmlFor={name}>
+                <span>{label}{required && <label className="text-red-600 text-sm after:content-['_*']"></label>}</span>
+            </label>
             {icon === true && <i className="absolute p-1.5"> {Icons} </i>}
-            <input className={styles}
+            <Input
+                style={{ width: 'auto', ...styles }}  // Largura "auto" para respeitar o estilo definido em customStyles
+                className={className}
                 type={type}
                 name={name}
                 onChange={onChange}

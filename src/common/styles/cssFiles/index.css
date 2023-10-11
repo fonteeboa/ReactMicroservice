@@ -1,4 +1,4 @@
-body, #root {
+body, #root, #rootScreenSize {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -22,9 +22,6 @@ body, #root {
   height: 100vh;
 }
 
-.content {
-  /* Estilos para o conteúdo principal */
-}
 /* Estilos para o container do grid */
 /* Estilos para o container do grid (o Card) */
 .grid-container {
@@ -46,21 +43,6 @@ body, #root {
   max-height: 65vh; /* Altura máxima de 80% da altura da tela */
   overflow-y: auto; /* Adicionar barra de rolagem vertical quando necessário */
 
-}
-
-/*  Estilos especificos para a tela quando o tamanho for menor que 800px. */
-@media screen and (max-height: 800px) {
-  .ant-table {
-    flex-grow: 1;
-    max-height: 55vh; /* Altura máxima de 55% da altura da tela */
-    overflow-y: auto;
-  }
-}
-/* Estilos especificos para a tela quando o tamanho for menor que 600px. */
-@media screen and (max-height: 600px), (max-width: 600px) {
-  #root {
-    display: none;
-  }
 }
 
 /* Estilos para os itens do grid (substitua isso com seus estilos) */
@@ -94,5 +76,53 @@ body, #root {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  margin-left: -215px; /* Adicione a largura do menu à esquerda */
+  margin-left: auto; /* Adicione a largura do menu à esquerda */
+}
+
+/* Estilos para a WarningPage */
+.warning-page {
+  display: none;
+}
+
+.customModal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-left: auto;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px; /* Espaçamento entre o conteúdo e os botões */
+}
+
+.modalFooter .btn {
+  margin-left: 10px; /* Espaçamento entre os botões */
+}
+
+/*  Estilos especificos para a tela quando o tamanho for menor que 800px. */
+@media screen and (max-height: 800px), (max-width: 800px) {
+  .ant-table {
+    flex-grow: 1;
+    max-height: 55vh; /* Altura máxima de 55% da altura da tela */
+    overflow-y: auto;
+  }
+}
+
+#rootScreenSize {
+  display: none
+}
+/* Mantenha as regras para ocultar elementos desnecessários */
+@media screen and (max-height: 400px), (max-width: 600px) {
+  #root, .layout, .sidebar, .sidebar-content, .Menu, .grid-container, .grid-item, .table-header, .customModal {
+    display: none;
+  }
+
+  #rootScreenSize {
+    display: flex;
+    z-index: 9999;
+  }
 }

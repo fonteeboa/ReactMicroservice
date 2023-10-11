@@ -1,7 +1,7 @@
 import { 
     checkMicroservice as checkMicroserviceInfra,
     getData as getDataIInfra
-} from '../../infra/requets';
+} from '../../infra/tabs/requets';
 
 /**
  * Checks the microservice by calling the checkMicroserviceInfra function.
@@ -19,6 +19,5 @@ export const checkMicroservice = async (): Promise<boolean> => {
  * @return {Promise<void>} - A Promise that resolves to nothing.
  */
 export const getData = async (data: any) => {
-    let response = await getDataIInfra(data);
-    console.log(response);
+    return await getDataIInfra(data);
 }

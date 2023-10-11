@@ -5,4 +5,10 @@ export interface IBox extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     onChange?: (e: any) => void;
     register?: any;
-};
+    options?: ISelectOption[];
+}
+
+interface ISelectOption {
+    value: string;
+    label: string;
+  }
