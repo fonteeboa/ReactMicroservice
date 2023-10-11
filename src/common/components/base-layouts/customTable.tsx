@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Button, Menu, Dropdown } from 'antd';
+import { Table, Card, Button, Menu, Dropdown, Popconfirm } from 'antd';
 import { tableStyle } from '../../constants/customTable';
 import type { ColumnsType } from 'antd/es/table';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 interface CustomTableProps<T> {
   dataSource: T[];
@@ -21,7 +23,9 @@ interface CustomTableProps<T> {
  * @return {JSX.Element} The rendered custom table component.
  */
 const CustomTable = <T extends object>({ pageTitle,  dataSource, columns, title, footer, bulkAction }: CustomTableProps<T>) => {
-
+  
+  const { t } = useTranslation();
+  
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
 
@@ -73,10 +77,24 @@ const CustomTable = <T extends object>({ pageTitle,  dataSource, columns, title,
 
   const menu = (
     <Menu onClick={({ key }) => handleOptionClick(key)}>
-      {bulkAction && bulkAction.map((item) => (
-        <Menu.Item key={item.label}>{item.label}</Menu.Item>
-      ))}
-    </Menu>
+    {bulkAction &&
+      bulkAction.map((item) =>
+        item.type && item.type === 'danger' ? (
+          <Popconfirm
+            title={item.confirmMessage ? item.confirmMessage : item.label}
+            onConfirm={() => handleOptionClick(item.label)} // Aqui você lida com a ação após a confirmação
+            okText={t('common.ok')} // Texto do botão de confirmação
+            cancelText={t('common.cancel')} // Texto do botão de cancelamento
+            icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+            key={item.label}
+          >
+            <Menu.Item key={item.label}>{item.label}</Menu.Item>
+          </Popconfirm>
+        ) : (
+          <Menu.Item key={item.label}>{item.label}</Menu.Item>
+        )
+      )}
+  </Menu>
   );
 
   useEffect(() => {

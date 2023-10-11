@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import AddPopupSettings from '../popup/addPopupSettings';
-import CustomTable from '../../../../common/components/layout/customTable';
+import CustomTable from '../../../../common/components/base-layouts/customTable';
 import type { ColumnsType } from 'antd/es/table';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import type { DataType } from '../../types/apiSettingsTypes';
-import { checkMicroservice } from '../../services/tabs/apiSettingsService';
+import { checkMicroservice, getData as getDataService } from '../../services/tabs/apiSettingsService';
 import DownloadMicroserviceScreen from '../../../../common/components/layout/downloadMicroserviceScreen';
 
 const ApiSettings: React.FC = () => {
@@ -16,14 +16,14 @@ const ApiSettings: React.FC = () => {
   // State for managing the visibility of the popup and current item
   const [isOpen, setIsOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<DataType | null>(null);
-  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(false);
+  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(true);
   const [data, setData] = useState<DataType[]>([]);
   
   const columns: ColumnsType<DataType> = [
     {
       title: t('common.name'),
       dataIndex: 'name',
-      render: (text) => <a>{text}</a>,
+      render: (text) => <p>{text}</p>,
     },
     {
       title: t('common.key'),
@@ -41,56 +41,38 @@ const ApiSettings: React.FC = () => {
   ];
 
   useEffect(() => {
+
+    const validateMicroservice = async () => {
+      const available = await checkMicroservice();
+      setIsMicroserviceAvailable(true);
+      //setIsMicroserviceAvailable(available);
+      if (available) fetchDataFromBackend();
+    };
+
     validateMicroservice();
   }, []);
 
   const handleEdit = (record: DataType) => {
-    // Define o item atual para edição e abre o popup
     setCurrentItem(record);
     setIsOpen(true);
   };
 
   const handleDelete = (id: string) => {
-    // Lógica para excluir o item com o ID fornecido
     console.log(`Excluir item com ID: ${id}`);
   };
 
   // Função para carregar os dados do backend (substitua pelo chamada real à API)
   const fetchDataFromBackend = async () => {
-    try {
-      // Simule uma chamada à API (substitua isso pelo código real)
-      const response = await fetch('/api/data'); 
-      if (response.ok) {
-        const data: DataType[] = await response.json();
-        setData(data);
-      } else {
-        console.error('Erro ao buscar dados do backend.');
-      }
-    } catch (error) {
-      console.error('Erro ao buscar dados do backend.', error);
-    }
-  };
-  
-  const validateMicroservice = async () => {
-    const available = await checkMicroservice();
-    setIsMicroserviceAvailable(available);
-    fetchDataFromBackend();
+    const response = await getDataService([]);
+    console.log(response);
+    //setData(response);
   };
 
-  const bulkActionOptions = [
-    {
-      label: 'Opção 1',
-      action: () => {
-        // Lógica para ação da Opção 1
-      },
-    },
-    {
-      label: 'Opção 2',
-      action: () => {
-        // Lógica para ação da Opção 2
-      },
-    },
-  ];
+  // Função para fechar o popup
+  const openModal = (id: any) => {
+    //if (id) setCurrentItem(null);
+    setIsOpen(true);
+  };
 
   // Função para fechar o popup
   const closeModal = () => {
@@ -98,13 +80,31 @@ const ApiSettings: React.FC = () => {
     setIsOpen(false);
   };
 
+  const deleteAll = () => {
+    // Lógica para excluir todos os itens
+    console.log('Excluir todos os itens');
+  }
+
+  const bulkActionOptions = [
+    {
+      label: t("common.add"),
+      action: openModal,
+      type: "primary",
+    },
+    {
+      label: t("common.delete.select"),
+      confirmMessage: t('common.delete.confirmation.multiple'),
+      action: deleteAll,
+      type: "danger",
+    },
+  ];
+
   return (
     <>
       {isMicroserviceAvailable ? (
         <>
-          {isOpen && currentItem && (
-            <AddPopupSettings closeModal={closeModal} currentItem={currentItem} />
-          )}
+          {isOpen && ( <AddPopupSettings closeModal={closeModal} currentItem={currentItem} /> )}
+          
           <CustomTable
             pageTitle={t("common.api_settings")}
             dataSource={data}
@@ -113,7 +113,7 @@ const ApiSettings: React.FC = () => {
           />
         </>
       ) : (
-       <DownloadMicroserviceScreen microserviceName="Microservício indisponível" downloadUrl="" />
+       <DownloadMicroserviceScreen microserviceName={t("common.api_settings")} downloadUrl="" />
       )}
     </>
   );

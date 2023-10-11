@@ -5,7 +5,7 @@ export interface IInputField extends InputHTMLAttributes<HTMLInputElement> {
     type?: string,
     icon?: boolean,
     label?: string,
-    styles?: string,
+    styles?: [],
     register?: any,
     mask?: "cep" | "currency" | "cpf" | "cnpj" | "phone" | "cell" | "serie" | "license"
     dataTestId?: string

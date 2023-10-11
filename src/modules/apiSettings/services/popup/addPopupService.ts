@@ -1,3 +1,9 @@
+import { insertData, updateData } from "../../infra/popup/requets";
+
 export const processData = async (data: any) => {   
-    console.log(data);
+    if (data.ID !== undefined) {
+        insertData(data);
+    } else {
+        updateData(data);
+    }
 }

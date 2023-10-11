@@ -2,65 +2,66 @@ import Modal from 'react-modal';
 import React, { useEffect } from "react";
 import { FormInstance } from "antd/lib/form";
 import { useTranslation } from 'react-i18next';
-import { Form, DatePicker } from "antd";
-import { XOutline } from "heroicons-react";
-import { ToastContainer } from 'react-toastify';
+import { Form, DatePicker, Card, Divider, Space, Row, Col } from "antd";
+import { InputField, Button, SelectComponent } from '../base-components';
 import moment from 'moment';
 import { validFields } from '../../helpers/utils';
-import { SelectComponent, InputField, Button } from '../base-components';
 
-import { Field, ModalProps, FormData } from '../../types/modalType';
+type Field = {
+  name: string;
+  label?: string;
+  type?: string;
+  placeholder?: string;
+  optionsFunction?: () => any;
+  style?: {};
+  doublelines?: Field[];
+  rules?: any[];
+  required?: boolean;
+};
 
-/**
- * Renders a custom modal component.
- *
- * @param {ModalProps} closeModal - Function to close the modal.
- * @param {Function} onSave - Function to save the form data.
- * @param {Array<Field>} fields - Array of form fields to render.
- * @param {string} contentLabel - Label for the modal content.
- * @param {any} currentItem - Current item data.
- * @return {ReactElement} The custom modal component.
- */
+type ModalProps = {
+  closeModal: (form: any) => void;
+  onSave: (data: FormInstance<FormData>) => void;
+  fields: Field[];
+  contentLabel: string;
+  currentItem?: any;
+};
+
+type FormData = {
+  [key: string]: string;
+};
+
+const customStyles = {
+  doublelines: {
+    display: 'flex',
+    width: '150%',
+    margin: '0 1%', // Espaço de 1% nas laterais
+    minWidth: '200px',
+  },
+  inline: {
+    display: 'inline-block',
+    width: '150%',
+    margin: '0',
+    minWidth: '200px',
+  },
+};
+
 export const CustomModal: React.FC<ModalProps> = ({ closeModal, onSave, fields, contentLabel, currentItem }) => {
   const { t } = useTranslation();
   const [form] = Form.useForm<FormInstance<FormData>>();
-  const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width:'620px',
-        height:'auto',
-    },
-  };
 
- 
   useEffect(() => {
-    /**
-     * Updates the values of the current item in the form.
-     * If the current item is an object, it iterates through each key and sets the corresponding form field value.
-     *
-     * @returns {void}
-     */
-    const setCurrentItemValues = () => {
-      if (typeof currentItem === 'object') {
-        Object.keys(currentItem).forEach((key) => {
-          form.setFieldsValue({ [key]: validFields(currentItem[key], key) });
-        })
-      }
-    }
-
     setCurrentItemValues();
-  }, [currentItem, form]);
+  }, []);
 
-  /**
-   * Handles the submit event for the form.
-   *
-   * @param {any} e - the submit event
-   */
+  const setCurrentItemValues = () => {
+    if (typeof currentItem === 'object' && currentItem !== null) {
+      Object.keys(currentItem).forEach((key) => {
+        form.setFieldsValue({ [key]: validFields(currentItem[key], key) });
+      })
+    }
+  }
+
   const handleSubmit = async (e: any) => {
     try {
       const values: FormInstance<FormData> = await form.validateFields();
@@ -70,12 +71,6 @@ export const CustomModal: React.FC<ModalProps> = ({ closeModal, onSave, fields, 
     }
   };
 
-  /**
-   * Sets the values of a field based on the event and field name.
-   *
-   * @param {any} e - the event object
-   * @param {string} fieldName - the name of the field
-   */
   const setFieldValues = (e: any, fieldName: string) => {
     let value = fieldName === 'date' ? moment(e).format("YYYY-MM-DD HH:mm") : e.target.value;
     if (value !== undefined) {
@@ -83,41 +78,44 @@ export const CustomModal: React.FC<ModalProps> = ({ closeModal, onSave, fields, 
     }
   };
 
-/**
- * Renders the fields for a given field object.
- *
- * @param {Field} field - The field object to render.
- * @return {JSX.Element} The rendered form item.
- */
   const renderfields = (field: Field) => {
-    return (
-        <Form.Item name={field.name} key={field.name}>
-          {identifyField(field)}
+    if (field.required && !field.rules) {
+      field.rules = ['required'];
+    }
+  
+    if (field.doublelines) {
+      return (
+        <Row gutter={16}>
+          {field.doublelines.map((field, index) => {
+            return (
+              <Col span={12}>
+                <Form.Item
+                  name={field.name}
+                  key={field.name}
+                  rules={field.rules ? field.rules : []}
+                >
+                  {identifyField(field, customStyles.doublelines, index)}
+                </Form.Item>
+              </Col>
+            );
+          })}
+        </Row>
+      );
+    } else {
+      return (
+        <Form.Item name={field.name} key={field.name} rules={field.rules ? field.rules : []} style={field.type === 'hidden' ? { display: 'none' } : undefined }>
+          {identifyField(field, customStyles.inline)}
         </Form.Item>
-    )
-  }
+      );
+    }
+  };
 
-  /**
-   * Closes the modal.
-   *
-   * @param {type} form - the form to be closed
-   * @return {type} undefined
-   */
-  const handleCloseModal = () => {
-    closeModal(form);
-  }
-
-  /**
-   * Generates the JSX component based on the field type.
-   *
-   * @param {Field} field - The field object containing information about the field.
-   * @return {JSX.Element} The generated JSX component.
-   */
-  const identifyField = (field: Field) => {
+  const identifyField = (field: Field, styleField: any = {}, index: number = 0)=> {
     switch(field.type){
       case 'select':
         return (
           <SelectComponent
+            style={styleField}
             data-testid={"dataTestId" + field.name}
             name={field.name}
             label={field.label}
@@ -126,12 +124,12 @@ export const CustomModal: React.FC<ModalProps> = ({ closeModal, onSave, fields, 
             {field.optionsFunction ? field.optionsFunction() : false}
           </SelectComponent>
         )
-      case 'date':
+      case 'datePicker':
         return (
-          <div>
-            <label className="block capitalize tracking-wide text-gray-700 text-xs font-normal mb-2" htmlFor={field.name}><span>{field.label}</span></label>
+          <div style={styleField}>
+            <label className="" htmlFor={field.name}><span>{field.label}</span></label>
             <DatePicker
-              className='block capitalize tracking-wide text-gray-700 text-xs font-normal mb-2'
+              className=''
               name={field.name}
               onChange={(date) => setFieldValues(date, field.name)} // <- Passar o nome do campo aqui
               data-testid={'dataTestId-' + field.name}
@@ -141,71 +139,57 @@ export const CustomModal: React.FC<ModalProps> = ({ closeModal, onSave, fields, 
         )
       default:
         return (
-            <InputField
+          <InputField
+            styles={styleField}
             type={field.type ? field.type : 'text'}
             name={field.name}
             label={field.label}
             data-testid={"dataTestId" + field.name}
             placeholder={field.placeholder ? field.placeholder : ''}
-            onChange={(date) => setFieldValues(date, field.name)} // <- Passar o nome do campo aqui
+            onChange={(date) => setFieldValues(date, field.name)}
+            key={index} // Defina uma chave única
           />
         )
     }
   }
 
   return (
-    <Modal
-      closeTimeoutMS={200}
-      isOpen={true}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel={contentLabel}
-    >
-      <div className="flex justify-between items-start rounded-t dark:border-gray-600">
-          <span className="text-sm font-semibold text-gray-900 dark:text-grey-900 text-sm font-light">{contentLabel}</span>
-          <button type="button" onClick={closeModal} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal">
-              <i><XOutline/></i>  
-          </button>
-      </div>
-      <Form form={form} onFinish={handleSubmit}>
-        <div className="py-2 px-4 border dark:border-gray-300">
-          {fields.map((field) => renderfields(field))}
-        </div>
-        <div className="modal-buttons flex w-[100%] h-[60px] justify-end bg-[#F9F9F9] items-center border-x border-b dark:border-gray-300">
-          <div className="flex items-baseline justify-center p-2">
-              <Button 
-                label={t('buttons.close')} 
-                type="default" 
-                color="alternative" 
-                onClick={handleCloseModal}
-                size="large"
-                key="btn-close"
-              />
-          </div>
-          <div className="flex items-baseline justify-center pr-4">            
-              <Button 
-                label={t('buttons.save')} 
-                type="default" 
-                color="primary" 
-                data-testid="btn-save"
-                size="large"
-                key="btn-save"
-              />
-          </div>
-        </div>
+<Modal
+  className="customModal"
+  isOpen={true}
+  onRequestClose={closeModal}
+  footer={null}
+>
+  <Card 
+    title={contentLabel}
+  >
+    <Space align="center">
+
+      <Form
+      name="complexForm"
+      className="complexForm"
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 16 }}
+      style={{ maxWidth: 600 }}
+      form={form}
+      onFinish={handleSubmit}
+        
+      >
+        {fields.map((field) => renderfields(field))}
       </Form>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />      
-    </Modal>
+    </Space>
+    
+    <Divider />
+
+    <div className="modalFooter">
+        <Button key="cancel" type="default" onClick={closeModal} className="btn btn-secondary" label={t("common.cancel")} />
+        <Button key="save" type="primary" onClick={handleSubmit} className="btn btn-primary" label={t("common.save")} />
+      </div>
+    
+  </Card>
+</Modal>
+
+
   );
 };

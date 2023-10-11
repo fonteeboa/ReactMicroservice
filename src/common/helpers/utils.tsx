@@ -28,7 +28,7 @@ export const checkMicroservice = async (baseUrl: string): Promise<boolean> => {
     const response = await fetch(baseUrl);
     return response.ok ? true : false;
   } catch (error) {
-    console.log(error);
+    console.log('Error checking microservice availability:', baseUrl);
     return false;
   }
 };
