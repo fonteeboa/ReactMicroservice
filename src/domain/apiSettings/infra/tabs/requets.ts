@@ -8,7 +8,7 @@ import { baseURL } from '../../constants/constants';
  * @return {Promise<boolean>} A boolean indicating whether the microservice is valid.
  */
 export const checkMicroservice = async (): Promise<boolean> => {
-    return checkMicroserviceHelpers(baseURL);
+    return checkMicroserviceHelpers(baseURL + '/health');
 }
 
 /**

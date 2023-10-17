@@ -2,4 +2,4 @@ const authors = {
     "author.jv": "João Victor",
   }
   
-  export default authors;
+export default authors;

@@ -32,7 +32,7 @@ const AddPopupSettings: React.FC<AddPopupSettingsType> = ({ closeModal, currentI
       <CustomModal
         contentLabel={currentItem ? t('common.edit') : t('common.add')}
         closeModal={closeModal}
-        onSave={handleSaveData} // Passa 'handleSaveData' como a função 'onSave'
+        onSave={handleSaveData}
         fields={fields}
         currentItem={currentItem}
         
