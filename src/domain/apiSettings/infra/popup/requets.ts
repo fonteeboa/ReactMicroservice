@@ -9,15 +9,20 @@ import { baseURL } from '../../constants/constants';
  */
 export const insertData = (data: any) => {
     console.log(data);
+    return []
+    /*
     api.request({
         method: 'post',
         url: '/apiConfig',
         data: data,
         baseUrl: baseURL
     })
+    */
 }
 
 export const updateData = (data: any) => {
+    return [];
+    /*
     console.log(data);
     api.request({
         method: 'put',
@@ -25,5 +30,5 @@ export const updateData = (data: any) => {
         data: data,
         baseUrl: baseURL
     })
-    
+    */
 }

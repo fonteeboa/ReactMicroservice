@@ -1,6 +1,5 @@
 import { api } from "../../../../common/infra/apiRequests";
-import { checkMicroservice as checkMicroserviceHelpers } from '../../../../common/helpers/utils';
-import { baseURL } from '../../constants/constants';	
+import { baseURL } from '../../constants/constants';
 
 /**
  * Checks the microservice.
@@ -8,8 +7,13 @@ import { baseURL } from '../../constants/constants';
  * @return {Promise<boolean>} A boolean indicating whether the microservice is valid.
  */
 export const checkMicroservice = async (): Promise<boolean> => {
-    return checkMicroserviceHelpers(baseURL + '/health');
-}
+    const response = await api.request({
+        method: 'get',
+        url: '/health', // Adjust the URL as needed
+        baseUrl: baseURL
+    });
+    return response === 'valid'; // Adjust this condition based on the response structure
+};
 
 /**
  * Retrieves data from the API.
@@ -17,25 +21,40 @@ export const checkMicroservice = async (): Promise<boolean> => {
  * @param {any} data - The data to be sent to the API.
  * @return {void} No return value.
  */
-export const getData = (data: any) => {
+export const getData = async (data: any) => {
     console.log(data);
 
-    api.request({
-        method: 'get',
-        url: '/api/data',
-        data: data,
-        baseUrl: baseURL
-    })
-}
+    try {
+        const response = await api.request({
+            method: 'get',
+            url: '/api/data',
+            data: data,
+            baseUrl: baseURL
+        });
+        // Process the response as needed
+        console.log(response);
+    } catch (error) {
+        // Handle the error
+        console.error(error);
+    }
+};
 
-
-export const deleteData = (data: any) => {
+export const deleteData = async (data: any) => {
     console.log(data);
-
-    api.request({
-        method: 'get',
-        url: '/api/data',
-        data: data,
-        baseUrl: baseURL
-    })
-}
+    
+    try {
+        const response = await api.request({
+            method: 'delete', // Assuming it's a DELETE request
+            url: '/api/data',
+            data: data,
+            baseUrl: baseURL
+        });
+        // Process the response as needed
+        console.log(response);
+        return response; // You can return the response if needed
+    } catch (error) {
+        // Handle the error
+        console.error(error);
+        return false; // Return false in case of an error
+    }
+};
