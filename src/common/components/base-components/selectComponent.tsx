@@ -22,6 +22,7 @@ export const SelectComponent: React.FC<IBox> = ({ name, value, label, onChange, 
     <>
       <label className="block capitalize tracking-wide text-gray-700 text-xs font-normal mb-2" htmlFor={name}><span>{label}</span></label>
       <Select
+        data-testid={'dataTestId-' + name}
         name={name}
         value={value}
         onChange={onChange}

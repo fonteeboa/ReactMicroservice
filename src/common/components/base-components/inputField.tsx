@@ -54,6 +54,7 @@ export const InputField: React.FC<IInputField> = ({ name, type, icon, label, onC
             </label>
             {icon === true && <i className="absolute p-1.5"> {Icons} </i>}
             <Input
+                data-testid={'dataTestId-' + name}
                 style={{ width: 'auto', ...styles }}  // Largura "auto" para respeitar o estilo definido em customStyles
                 className={className}
                 type={type}
