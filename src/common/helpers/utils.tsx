@@ -8,13 +8,13 @@ import moment from 'moment';
  * @return {any} - The processed value.
  */
 export const validFields:any = (value: any, type:any) => {
-    switch (type) {
-      case 'date':
-      case 'scheduled': 
-        return moment(value);
-        
-      default: return value;
-    }
+  switch (type) {
+    case 'date':
+    case 'scheduled': 
+      return moment(value);
+      
+    default: return value;
+  }
 }
 
 /**

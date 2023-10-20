@@ -16,7 +16,7 @@ const ApiSettings: React.FC = () => {
   // State for managing the visibility of the popup and current item
   const [isOpen, setIsOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<DataType | null>(null);
-  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(false);
+  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(true);
   const [data, setData] = useState<DataType[]>([]);
   
   const columns: ColumnsType<DataType> = [
@@ -39,14 +39,9 @@ const ApiSettings: React.FC = () => {
       ),
     },
   ];
-
+/*
   useEffect(() => {
 
-    /**
-     * Validates the microservice availability and fetches data from the backend if available.
-     *
-     * @return {Promise<void>} - Returns a promise that resolves when the validation is complete.
-     */
     const validateMicroservice = async () => {
       const available = await checkMicroservice();
       //setIsMicroserviceAvailable(true);
@@ -55,7 +50,7 @@ const ApiSettings: React.FC = () => {
     };
 
     validateMicroservice();
-  }, []);
+  }, []);*/
 
   const handleEdit = (record: DataType) => {
     setCurrentItem(record);
