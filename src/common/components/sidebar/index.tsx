@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { menuItems } from '../../constants/sidebarData';
-import { MenuItem, SubMenuItem } from '../../types/MenuItem';
+import { MenuItem, SubMenuItem } from './types';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';

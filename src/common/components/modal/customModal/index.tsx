@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { FormInstance } from "antd/lib/form";
 import { useTranslation } from 'react-i18next';
 import { Form, DatePicker, Card, Divider, Space, Row, Col } from "antd";
-import { InputField, Button, SelectComponent } from '../base-components';
+import { InputField, Button, SelectComponent } from '../../base-components';
 import moment from 'moment';
-import { validFields } from '../../helpers/utils';
+import { validFields } from '../../../helpers/utils';
 
 type Field = {
   name: string;
