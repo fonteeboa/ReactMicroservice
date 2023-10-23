@@ -1,4 +1,4 @@
-import { api } from "../../../../common/infra/apiRequests";
+//import { api } from "../../../../common/infra/apiRequests";
 import { baseURL } from '../../constants/constants';
 
 /**
@@ -7,12 +7,15 @@ import { baseURL } from '../../constants/constants';
  * @return {Promise<boolean>} A boolean indicating whether the microservice is valid.
  */
 export const checkMicroservice = async (): Promise<boolean> => {
+    return false;
+    /*
     const response = await api.request({
         method: 'get',
         url: '/health', // Adjust the URL as needed
         baseUrl: baseURL
     });
     return response === 'valid'; // Adjust this condition based on the response structure
+    */
 };
 
 /**
@@ -23,7 +26,8 @@ export const checkMicroservice = async (): Promise<boolean> => {
  */
 export const getData = async (data: any) => {
     console.log(data);
-
+return [];
+/*
     try {
         const response = await api.request({
             method: 'get',
@@ -37,11 +41,12 @@ export const getData = async (data: any) => {
         // Handle the error
         console.error(error);
     }
+    */
 };
 
 export const deleteData = async (data: any) => {
     console.log(data);
-    
+    /*
     try {
         const response = await api.request({
             method: 'delete', // Assuming it's a DELETE request
@@ -57,4 +62,5 @@ export const deleteData = async (data: any) => {
         console.error(error);
         return false; // Return false in case of an error
     }
+    */
 };

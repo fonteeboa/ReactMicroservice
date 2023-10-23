@@ -3,15 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Import components from modules
 import Dashboard from '../dashboard/components/tabs/dashboard';
 import ApiConfigScreen from '../apiSettings/components/tabs/apiSettings';
-
 import ScreenLayout from '../../common/components/layout/screenLayout';
-
 import '../i18n/i18n';
+import { menuItems } from '../constants/sidebarData';
 
 function AppRouter() {
   return (
     <Router>
-      <ScreenLayout>
+      <ScreenLayout menuItems={menuItems}>
         <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/apiSettings" element={<ApiConfigScreen />} />
