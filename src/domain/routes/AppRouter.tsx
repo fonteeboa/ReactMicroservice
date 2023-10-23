@@ -6,7 +6,7 @@ import ApiConfigScreen from '../apiSettings/components/tabs/apiSettings';
 
 import ScreenLayout from '../../common/components/layout/screenLayout';
 
-import '../../common/i18n/i18n';
+import '../i18n/i18n';
 
 function AppRouter() {
   return (

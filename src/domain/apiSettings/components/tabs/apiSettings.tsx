@@ -39,7 +39,7 @@ const ApiSettings: React.FC = () => {
       ),
     },
   ];
-/*
+
   useEffect(() => {
 
     const validateMicroservice = async () => {
@@ -50,7 +50,7 @@ const ApiSettings: React.FC = () => {
     };
 
     validateMicroservice();
-  }, []);*/
+  }, []);
 
   const handleEdit = (record: DataType) => {
     setCurrentItem(record);
