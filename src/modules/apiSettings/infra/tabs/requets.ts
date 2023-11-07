@@ -1,5 +1,6 @@
-//import { api } from "../../../../common/infra/apiRequests";
-import { baseURL } from '../../constants/constants';
+import { checkGetRequest, getService } from '../../../../common/infra/apiRequests';
+
+import { baseURL } from '../../constants';
 
 /**
  * Checks the microservice.
@@ -7,15 +8,7 @@ import { baseURL } from '../../constants/constants';
  * @return {Promise<boolean>} A boolean indicating whether the microservice is valid.
  */
 export const checkMicroservice = async (): Promise<boolean> => {
-    return false;
-    /*
-    const response = await api.request({
-        method: 'get',
-        url: '/health', // Adjust the URL as needed
-        baseUrl: baseURL
-    });
-    return response === 'valid'; // Adjust this condition based on the response structure
-    */
+    return await checkGetRequest({ baseUrl: baseURL, route: '/health' });
 };
 
 /**
@@ -25,23 +18,7 @@ export const checkMicroservice = async (): Promise<boolean> => {
  * @return {void} No return value.
  */
 export const getData = async (data: any) => {
-    console.log(data);
-return [];
-/*
-    try {
-        const response = await api.request({
-            method: 'get',
-            url: '/api/data',
-            data: data,
-            baseUrl: baseURL
-        });
-        // Process the response as needed
-        console.log(response);
-    } catch (error) {
-        // Handle the error
-        console.error(error);
-    }
-    */
+    return await getService({ baseUrl: baseURL, route: '/data', body: data });
 };
 
 export const deleteData = async (data: any) => {

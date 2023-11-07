@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CustomModal } from '../../../../common/components/modal/customModal';
-import { processData } from '../../services/popup/addPopupService';
+import { CustomModal } from '../../../../../common/components/modal/customModal';
+import { processData } from '../../../services/popup/AddPopupSettings';
 
 type AddPopupSettingsType = {
   closeModal: () => void; // Remove a passagem do 'form'

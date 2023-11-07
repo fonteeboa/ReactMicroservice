@@ -1,7 +1,7 @@
 import { 
     checkMicroservice as checkMicroserviceInfra,
     getData as getDataIInfra
-} from '../../infra/tabs/requets';
+} from '../../../infra/tabs/requets';
 
 /**
  * Checks the microservice by calling the checkMicroserviceInfra function.

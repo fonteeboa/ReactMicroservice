@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import AddPopupSettings from '../popup/addPopupSettings';
-import CustomTable from '../../../../common/components/base-layouts/customTable';
+import AddPopupSettings from '../../popup/AddPopupSettings';
 import type { ColumnsType } from 'antd/es/table';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import type { DataType } from '../../types/apiSettingsTypes';
-import { checkMicroservice, getData as getDataService } from '../../services/tabs/apiSettingsService';
-import DownloadMicroserviceScreen from '../../../../common/components/layout/downloadMicroserviceScreen';
+import type { DataType } from '../../../domain';
+import { checkMicroservice, getData as getDataService } from '../../../services/tabs/ApiSettings';
+import CustomTable from '../../../../../common/components/base-layouts/customTable';
+import DownloadMicroserviceScreen from '../../../../../common/components/layout/downloadMicroserviceScreen';
 
 const ApiSettings: React.FC = () => {
   const { t } = useTranslation();
@@ -18,27 +18,6 @@ const ApiSettings: React.FC = () => {
   const [currentItem, setCurrentItem] = useState<DataType | null>(null);
   const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(true);
   const [data, setData] = useState<DataType[]>([]);
-  
-  const columns: ColumnsType<DataType> = [
-    {
-      title: t('common.name'),
-      dataIndex: 'name',
-      render: (text) => <p>{text}</p>,
-    },
-    {
-      title: t('common.key'),
-      dataIndex: 'key',
-    },
-    {
-      title: t('common.actions'),
-      render: (record) => (
-        <div>
-          <Button icon={<FontAwesomeIcon icon={faEdit} />} onClick={() => handleEdit(record.key)} />
-          <Button icon={<FontAwesomeIcon icon={faTrash} />} onClick={() => handleDelete(record.key)} />
-        </div>
-      ),
-    },
-  ];
 
   useEffect(() => {
 
@@ -67,35 +46,43 @@ const ApiSettings: React.FC = () => {
     console.log(response);
     //setData(response);
   };
-
-  // Função para fechar o popup
-  const openModal = (id: any) => {
-    //if (id) setCurrentItem(null);
-    setIsOpen(true);
-  };
-
   // Função para fechar o popup
   const closeModal = () => {
     setCurrentItem(null);
     setIsOpen(false);
   };
 
-  const deleteAll = () => {
+  const deleteAll = (arrayIds: any = []) => {
+    console.log(arrayIds);
     // Lógica para excluir todos os itens
     console.log('Excluir todos os itens');
   }
 
-  const bulkActionOptions = [
+  // Função para fechar o popup
+  const openModal = () => {
+    console.log('action');
+    //if (id) setCurrentItem(null);
+    setIsOpen(true);
+  };
+
+  const columns: ColumnsType<DataType> = [
     {
-      label: t("common.add"),
-      action: openModal,
-      type: "primary",
+      title: t('common.name'),
+      dataIndex: 'name',
+      render: (text) => <p>{text}</p>,
     },
     {
-      label: t("common.delete.select"),
-      confirmMessage: t('common.delete.confirmation.multiple'),
-      action: deleteAll,
-      type: "danger",
+      title: t('common.key'),
+      dataIndex: 'key',
+    },
+    {
+      title: t('common.actions'),
+      render: (record) => (
+        <div>
+          <Button icon={<FontAwesomeIcon icon={faEdit} />} onClick={() => handleEdit(record.key)} />
+          <Button icon={<FontAwesomeIcon icon={faTrash} />} onClick={() => handleDelete(record.key)} />
+        </div>
+      ),
     },
   ];
 
@@ -109,11 +96,13 @@ const ApiSettings: React.FC = () => {
             pageTitle={t("common.api_settings")}
             dataSource={data}
             columns={columns}
-            bulkAction={bulkActionOptions}
+            deleteAction={deleteAll}
+            openModalAction={openModal}
+
           />
         </>
       ) : (
-       <DownloadMicroserviceScreen microserviceName={t("common.api_settings")} downloadUrl="" />
+       <DownloadMicroserviceScreen microserviceName={t("common.api_settings")} downloadUrl="https://github.com/galvao845/go-api-settings" />
       )}
     </>
   );

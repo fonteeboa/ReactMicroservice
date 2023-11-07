@@ -4,7 +4,7 @@ import {
     faGear
 } from '@fortawesome/free-solid-svg-icons';
   
-import { MenuItem } from '../../common/components/layout/sidebar/types';
+import { MenuItem } from '../../../common/components/layout/sidebar/domain';
 
 export const menuItems: MenuItem[] = [
   {
