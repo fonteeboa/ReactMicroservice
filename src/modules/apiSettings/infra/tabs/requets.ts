@@ -1,6 +1,6 @@
 import { checkGetRequest, getService } from '../../../../common/infra/apiRequests';
 
-import { baseURL } from '../../constants';
+import { baseURL } from '../constants';
 
 /**
  * Checks the microservice.
