@@ -1,5 +1,5 @@
 import React from 'react';
-import AppRouter from '../routes/AppRouter';
+import AppRouter from '../routes';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');

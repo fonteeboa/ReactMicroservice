@@ -1,4 +1,4 @@
-import { checkGetRequest, getService } from '../../../../common/infra/apiRequests';
+import { checkGetRequest, getService } from '../../../../common/infra/requests';
 
 import { baseURL } from '../constants';
 
