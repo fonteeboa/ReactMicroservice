@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { checkMicroservice, getData as getDataService } from '../../../../services/tabs/ApiSettings';
+import { checkMicroservice, getData as getDataService } from '../../../../services/tabs/apiSettings';
 import { useTranslation } from 'react-i18next';
 import { DataType } from '../../../../domain';
 
