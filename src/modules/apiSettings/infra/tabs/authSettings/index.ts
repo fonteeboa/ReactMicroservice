@@ -1,6 +1,5 @@
-import { checkGetRequest, getService } from '../../../../common/infra/requests';
-
-import { baseURL } from '../constants';
+import { checkGetRequest, getService } from '../../../../../common/infra/requests';
+import { baseURL } from '../../constants';
 
 /**
  * Checks the microservice.
@@ -18,7 +17,7 @@ export const checkMicroservice = async (): Promise<boolean> => {
  * @return {void} No return value.
  */
 export const getData = async (data: any) => {
-    return await getService({ baseUrl: baseURL, route: '/data', body: data });
+    return await getService({ baseUrl: baseURL, route: '/auth', body: data });
 };
 
 export const deleteData = async (data: any) => {

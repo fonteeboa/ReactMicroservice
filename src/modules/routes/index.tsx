@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Import components from modules
 import Dashboard from '../dashboard/components/tabs';
-import ApiConfigScreen from '../apiSettings/components/tabs/apiSettings';
+import ApiConfigPages from '../apiSettings/components/pages';
 import ScreenLayout from '../../common/components/layout/screenLayout';
 import '../i18n/i18n';
 import { menuItems } from '../menu/domain';
@@ -13,7 +13,7 @@ function AppRouter() {
       <ScreenLayout menuItems={menuItems}>
         <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/apiSettings" element={<ApiConfigScreen />} />
+            <Route path="/apiSettings" element={<ApiConfigPages />} />
         </Routes>
       </ScreenLayout>
     </Router>

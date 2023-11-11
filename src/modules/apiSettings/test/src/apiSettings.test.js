@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ApiSettings from '../../components/tabs/apiSettings';
+import ApiSettings from '../../components/tabs/authSettings';
 import * as apiSettingsService from '../../services/tabs/apiSettingsService';
 import * as apiRequestsInfra from '../../infra/tabs/requets'; 
 

@@ -1,17 +1,15 @@
 import React from 'react';
-import AddPopupSettings from '../../popup/AddPopupSettings';
+import AuthPopup from '../../popup/authPopup';
 import CustomTable from '../../../../../common/components/base-layouts/customTable';
-import DownloadMicroserviceScreen from '../../../../../common/components/layout/downloadMicroserviceScreen';
 import { useApiSettings } from './functions';
-
 import type { ColumnsType } from 'antd/es/table';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import type { DataType } from '../../../domain';
 
-const ApiSettings: React.FC = () => {
-  const { isOpen, currentItem, isMicroserviceAvailable, data, t, closeModal, deleteAll, openModal, handleEdit, handleDelete} = useApiSettings();
+const AuthSettings: React.FC = () => {
+  const { isOpen, currentItem, data, t, closeModal, deleteAll, openModal, handleEdit, handleDelete} = useApiSettings();
 
   const columns: ColumnsType<DataType> = [
     {
@@ -34,25 +32,15 @@ const ApiSettings: React.FC = () => {
 
   return (
     <>
-      {isMicroserviceAvailable ? (
-        <>
-          {isOpen && (
-            <AddPopupSettings closeModal={closeModal} currentItem={currentItem} />
-          )}
-          
-          <CustomTable
-            pageTitle={t("common.api_settings")}
-            dataSource={data}
-            columns={columns}
-            deleteAction={deleteAll}
-            openModalAction={openModal}
-          />
-        </>
-      ) : (
-       <DownloadMicroserviceScreen microserviceName={t("common.api_settings")} downloadUrl="https://github.com/galvao845/go-api-settings" />
-      )}
-    </>
+    {isOpen && ( <AuthPopup closeModal={closeModal} currentItem={currentItem} /> )}
+    <CustomTable
+      dataSource={data}
+      columns={columns}
+      deleteAction={deleteAll}
+      openModalAction={openModal}
+    />
+  </>
   );
 };
 
-export default ApiSettings;
+export default AuthSettings;

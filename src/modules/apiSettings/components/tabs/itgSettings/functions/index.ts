@@ -1,26 +1,19 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import { checkMicroservice, getData as getDataService } from '../../../../services/tabs/apiSettings';
+import { getData as getDataService } from '../../../../services/tabs/itgSettings';
 import { useTranslation } from 'react-i18next';
 import { DataType } from '../../../../domain';
 
 export const useApiSettings = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<DataType | null>(null);
-  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(true);
   const [data, setData] = useState<DataType[]>([]);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    const validateMicroservice = async () => {
-      const available = await checkMicroservice();
-      setIsMicroserviceAvailable(available);
-      if (available) fetchDataFromBackend();
-    };
-
-    validateMicroservice();
+    fetchDataFromBackend();
   }, []);
-
+  
   const handleEdit = (record: DataType) => {
     setCurrentItem(record);
     setIsOpen(true);
@@ -56,7 +49,6 @@ export const useApiSettings = () => {
   return {
     isOpen,
     currentItem,
-    isMicroserviceAvailable,
     data,
     t,
     handleEdit,

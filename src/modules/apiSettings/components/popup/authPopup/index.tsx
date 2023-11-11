@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CustomModal } from '../../../../../common/components/modal/customModal';
-import { AddPopupSettingsType } from './domain';
-import { useAddPopupSettings } from './functions';
+import { AuthPopupType } from './domain';
+import { useAuthPopup } from './functions';
 
-const AddPopupSettings: React.FC<AddPopupSettingsType> = ({ closeModal, currentItem }) => {
+const AuthPopup: React.FC<AuthPopupType> = ({ closeModal, currentItem }) => {
   const { t } = useTranslation();
-  const { handleSaveData } = useAddPopupSettings(closeModal);
+  const { handleSaveData } = useAuthPopup(closeModal);
   
   const fields = [
     { label: 'ID', name: 'ID', type: 'hidden' },
@@ -32,4 +32,4 @@ const AddPopupSettings: React.FC<AddPopupSettingsType> = ({ closeModal, currentI
   );
 };
 
-export default AddPopupSettings;
+export default AuthPopup;
