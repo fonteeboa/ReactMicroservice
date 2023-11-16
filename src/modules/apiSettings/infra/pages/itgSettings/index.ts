@@ -1,4 +1,5 @@
 import { checkGetRequest, getService } from '../../../../../common/infra/requests';
+import { getData as getAuth } from '../authSettings';
 import { baseURL } from '../../constants';
 
 /**
@@ -19,6 +20,11 @@ export const checkMicroservice = async (): Promise<boolean> => {
 export const getData = async (data: any) => {
     return await getService({ baseUrl: baseURL, route: '/itg', body: data });
 };
+
+
+export const getSelectDataServiceInfra = async () => {
+    return await getAuth({});
+}
 
 export const deleteData = async (data: any) => {
     console.log(data);
