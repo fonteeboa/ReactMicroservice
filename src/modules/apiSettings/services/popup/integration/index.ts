@@ -1,6 +1,6 @@
 import {
     insertData, updateData,
-} from '../../../infra/popup/itgPopup';
+} from '../../../infra/popup/integration';
 
 
 export const processData = async (data: any) => {   
