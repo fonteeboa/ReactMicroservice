@@ -1,5 +1,6 @@
 export interface DataType {
-    key: string;
-    name: string;
+    ID: string | number;
+    Key: string;
+    Name: string;
     hidden: boolean;
 }

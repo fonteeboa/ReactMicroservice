@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { importCSS } from './common/styles/cssImports';
 // Importe componente
 import App from './modules/main';
-import WarningPageScreenSize from './common/components/layout/WarningPageScreenSize';
+import WarningPageScreenSize from './common/components/layout/warningPageScreenSize';
 
 importCSS();
 
