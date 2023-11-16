@@ -1,6 +1,6 @@
 import { checkGetRequest, getService } from '../../../../../common/infra/requests';
-import { getData as getAuth } from '../authorization';
-import { baseURL } from '../../constants';
+import { getData as getAuth } from '../authorization/authorizationPageInfra';
+import { baseURL } from '../../constants/infraConstants';
 
 /**
  * Checks the microservice.

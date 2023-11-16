@@ -1,4 +1,4 @@
-import { processData } from '../../../services/popup/authorization';
+import { processData } from '../../../services/popup/authorization/authorizationPopupService';
 
 export const useAuthPopup = (closeModal: any) => {
   const handleSaveData = async (values : any) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import { getData as getDataService, getSelectDataService } from '../../../services/pages/integration';
+import { getData as getDataService, getSelectDataService } from '../../../services/pages/integration/integrationPageService';
 import { useTranslation } from 'react-i18next';
 import { DataType } from '../../../domain';
 

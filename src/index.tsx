@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './shared/reportWebVitals';
 // Importe CSS
-import { importCSS } from './common/styles/cssImports';
+import { importCSS } from './common/assets/styles/cssImports';
 // Importe componente
-import App from './modules/main';
+import App from './shared/main';
 import WarningPageScreenSize from './common/components/layout/warningPageScreenSize';
 
 importCSS();

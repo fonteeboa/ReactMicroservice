@@ -1,5 +1,5 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import { getData as getDataService } from '../../../services/pages/authorization';
+import { getData as getDataService } from '../../../services/pages/authorization/authorizationPageService';
 import { useTranslation } from 'react-i18next';
 import { DataType } from '../../../domain';
 

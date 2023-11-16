@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { checkMicroservice } from '../../../services/pages/general';
+import { checkMicroservice } from '../../../services/pages/general/generalPageService';
 import { useTranslation } from 'react-i18next';
 
 /**

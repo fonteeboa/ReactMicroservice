@@ -1,5 +1,5 @@
 import { checkGetRequest } from '../../../../../common/infra/requests'
-import { baseURL } from '../../constants';
+import { baseURL } from '../../constants/infraConstants';
 
 /**
  * Checks the microservice.

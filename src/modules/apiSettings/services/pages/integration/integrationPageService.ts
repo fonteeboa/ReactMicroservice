@@ -2,7 +2,7 @@ import {
     checkMicroservice as checkMicroserviceInfra,
     getData as getDataIInfra,
     getSelectDataServiceInfra
-} from '../../../infra/pages/integration';
+} from '../../../infra/pages/integration/integrationPageInfra';
 
 
 /**

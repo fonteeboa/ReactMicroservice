@@ -3,7 +3,7 @@ import DynamicTable from '../../../../common/components/baseLayouts/dynamicTable
 import { useApiSettings } from './functions';
 import type { ColumnsType } from 'antd/es/table';
 import type { DataType } from '../../domain';
-import AuthPopup from '../../popups/authorization';
+import AuthPopup from '../../popups/authorization/authorizationPopup';
 
 const AuthSettings: React.FC = () => {
   const { isOpen, currentItem, data, t, closeModal, deleteAll, openModal} = useApiSettings();

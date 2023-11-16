@@ -27,5 +27,5 @@
   },
   "include": [
     "src"
-, "react-app-env.d.ts", "react-modal.d.ts", "src/reportWebVitals.ts"  ]
+, "react-app-env.d.ts", "react-modal.d.ts", "src/shared/reportWebVitals.ts"  ]
 }

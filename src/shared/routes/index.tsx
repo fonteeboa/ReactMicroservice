@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // Import components from modules
-import Dashboard from '../dashboard/pages';
-import ApiConfigPages from '../apiSettings/pages/general';
+import Dashboard from '../../modules/dashboard/pages';
+import ApiConfigPages from '../../modules/apiSettings/pages/general/generalPage';
 import ScreenLayout from '../../common/components/layout/screenLayout';
-import '../i18n/i18n';
-import { menuItems } from '../menu/constants';
+import '../../modules/i18n/i18n';
+import { menuItems } from '../../modules/menu/constants';
 
 function AppRouter() {
   return (

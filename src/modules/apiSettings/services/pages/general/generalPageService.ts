@@ -1,4 +1,4 @@
-import { checkMicroservice as checkMicroserviceInfra } from '../../../infra/pages/general';
+import { checkMicroservice as checkMicroserviceInfra } from '../../../infra/pages/general/generalPageInfra';
 
 /**
  * Checks the microservice by calling the checkMicroserviceInfra function.

@@ -1,6 +1,6 @@
 import {
     getData as getDataIInfra
-} from '../../../infra/pages/authorization';
+} from '../../../infra/pages/authorization/authorizationPageInfra';
 
 
 

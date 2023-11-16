@@ -1,5 +1,5 @@
 import React from 'react';
-import ItgPopup from '../../popups/integration';
+import ItgPopup from '../../popups/integration/integrationPopup';
 import DynamicTable from '../../../../common/components/baseLayouts/dynamicTable';
 import { useApiSettings } from './functions';
 import type { ColumnsType } from 'antd/es/table';

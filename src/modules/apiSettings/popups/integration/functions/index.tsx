@@ -1,4 +1,4 @@
-import { processData } from '../../../services/popup/integration';
+import { processData } from '../../../services/popup/integration/integrationPopupService.tsx';
 import { DataType } from '../../../domain';
 
 export const useAuthPopup = (closeModal: any, data: DataType[]) => {
