@@ -1,4 +1,4 @@
-import { insertData, updateData } from "../../../infra/popup/authPopup";
+import { insertData, updateData } from "../../../infra/popup/authorization";
 
 export const processData = async (data: any) => {   
     console.log(data);

@@ -1,5 +1,5 @@
 import { checkGetRequest, getService } from '../../../../../common/infra/requests';
-import { getData as getAuth } from '../authSettings';
+import { getData as getAuth } from '../authorization';
 import { baseURL } from '../../constants';
 
 /**
