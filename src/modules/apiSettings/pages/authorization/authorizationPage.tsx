@@ -22,7 +22,8 @@ const AuthSettings: React.FC = () => {
 
   return (
     <>
-        {isOpen && ( <AuthPopup closeModal={closeModal} currentItem={currentItem} /> )}
+      {isOpen && ( <AuthPopup closeModal={closeModal} currentItem={currentItem} /> )}
+      
       <DynamicTable
         rowSelectionBoolean={false}
         dataSource={data}
@@ -30,7 +31,7 @@ const AuthSettings: React.FC = () => {
         deleteAction={deleteAll}
         openModalAction={openModal}
       />
-  </>
+    </>
   );
 };
 

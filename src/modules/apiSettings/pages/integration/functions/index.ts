@@ -39,6 +39,7 @@ export const useApiSettings = () => {
   const closeModal = () => {
     setCurrentItem(null);
     setIsOpen(false);
+    fetchDataFromBackend();
   };
 
   const deleteAll = (arrayIds: any = []) => {

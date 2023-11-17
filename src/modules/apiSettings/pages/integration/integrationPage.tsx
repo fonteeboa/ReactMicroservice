@@ -32,15 +32,16 @@ const ItgSettings: React.FC = () => {
 
   return (
     <>
-    {isOpen && ( <ItgPopup closeModal={closeModal} currentItem={currentItem} data={dataSelect} /> )}
-    <DynamicTable
-      rowSelectionBoolean={true}
-      dataSource={data}
-      columns={columns}
-      deleteAction={deleteAll}
-      openModalAction={openModal}
-    />
-  </>
+      {isOpen && ( <ItgPopup closeModal={closeModal} currentItem={currentItem} data={dataSelect} /> )}
+      
+      <DynamicTable
+        rowSelectionBoolean={true}
+        dataSource={data}
+        columns={columns}
+        deleteAction={deleteAll}
+        openModalAction={openModal}
+      />
+    </>
   );
 };
 
