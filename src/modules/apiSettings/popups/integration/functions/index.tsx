@@ -1,7 +1,7 @@
 import { processData } from '../../../services/popup/integration/integrationPopupService.tsx';
-import { DataType } from '../../../domain';
+import { Integration } from '../../../domain';
 
-export const useAuthPopup = (closeModal: any, data: DataType[]) => {
+export const useAuthPopup = (closeModal: any, data: Integration[]) => {
 
   const handleSaveData = async (values : any) => {
       await processData(values);
@@ -9,7 +9,7 @@ export const useAuthPopup = (closeModal: any, data: DataType[]) => {
   };
 
   const renderOptionsApiName = () => {
-    return data.map((item: DataType) => {
+    return data.map((item: Integration) => {
       return (
         <option key={item.ID} value={item.ID}>
           {item.Name}

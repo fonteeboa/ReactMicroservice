@@ -1,6 +1,15 @@
-export interface DataType {
+export interface Authorization {
+	ID: string | number
+	Name:        string
+	Description: string 
+}
+
+export interface Integration {
     ID: string | number;
-    Key: string;
+    ApiKey: string;
     Name: string;
     hidden: boolean;
+    ApiID: boolean;
+    Authorization: Authorization;
+    AuthorizationName?: string;
 }

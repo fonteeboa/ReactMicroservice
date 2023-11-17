@@ -1,7 +1,7 @@
-import { DataType } from '../../../domain';
+import { Integration } from '../../../domain';
 
 export type ItgPopupType = {
     closeModal: () => void;
     currentItem: any;
-    data: DataType[];
+    data: Integration[];
 };

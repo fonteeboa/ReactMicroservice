@@ -2,13 +2,13 @@ import React from 'react';
 import DynamicTable from '../../../../common/components/baseLayouts/dynamicTable';
 import { useApiSettings } from './functions';
 import type { ColumnsType } from 'antd/es/table';
-import type { DataType } from '../../domain';
+import type { Authorization } from '../../domain';
 import AuthPopup from '../../popups/authorization/authorizationPopup';
 
 const AuthSettings: React.FC = () => {
-  const { isOpen, currentItem, data, t, closeModal, deleteAll, openModal} = useApiSettings();
+  const { isOpen, currentItem, data, t, closeModal, openModal} = useApiSettings();
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<Authorization> = [
     {
       title: t('common.name'),
       dataIndex: 'Name',
@@ -28,8 +28,8 @@ const AuthSettings: React.FC = () => {
         rowSelectionBoolean={false}
         dataSource={data}
         columns={columns}
-        deleteAction={deleteAll}
         openModalAction={openModal}
+        showBulkActionOptions={false}
       />
     </>
   );

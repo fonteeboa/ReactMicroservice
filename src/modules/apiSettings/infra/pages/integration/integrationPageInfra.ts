@@ -1,7 +1,7 @@
-import { checkGetRequest, getService } from '../../../../../common/infra/requests';
+import { checkGetRequest, getService, deleteService, deleteWithBodyService} from '../../../../../common/infra/requests';
 import { getData as getAuth } from '../authorization/authorizationPageInfra';
 import { baseURL } from '../../constants/infraConstants';
-
+import { Integration } from '../../../domain';
 /**
  * Checks the microservice.
  *
@@ -17,7 +17,7 @@ export const checkMicroservice = async (): Promise<boolean> => {
  * @param {any} data - The data to be sent to the API.
  * @return {void} No return value.
  */
-export const getData = async (data: any) => {
+export const getData = async (data?: Integration) => {
     return await getService({ baseUrl: baseURL, route: '/itg', body: data });
 };
 
@@ -26,23 +26,10 @@ export const getSelectDataServiceInfra = async () => {
     return await getAuth({});
 }
 
-export const deleteData = async (data: any) => {
-    console.log(data);
-    /*
-    try {
-        const response = await api.request({
-            method: 'delete', // Assuming it's a DELETE request
-            url: '/api/data',
-            data: data,
-            baseUrl: baseURL
-        });
-        // Process the response as needed
-        console.log(response);
-        return response; // You can return the response if needed
-    } catch (error) {
-        // Handle the error
-        console.error(error);
-        return false; // Return false in case of an error
-    }
-    */
+export const deleteData = async (data: Integration): Promise<boolean> => {
+    return await deleteService({ baseUrl: baseURL, route: '/itg', body: data});
 };
+
+export const deleteAll = async (data: Integration[]): Promise<boolean> => {
+    return await deleteWithBodyService({ baseUrl: baseURL, route: '/itgAll', body: data});
+}

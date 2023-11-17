@@ -1,12 +1,12 @@
 import { useState, useEffect, SetStateAction } from 'react';
 import { getData as getDataService } from '../../../services/pages/authorization/authorizationPageService';
 import { useTranslation } from 'react-i18next';
-import { DataType } from '../../../domain';
+import { Authorization } from '../../../domain';
 
 export const useApiSettings = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentItem, setCurrentItem] = useState<DataType | null>(null);
-  const [data, setData] = useState<DataType[]>([]);
+  const [currentItem, setCurrentItem] = useState<Authorization | null>(null);
+  const [data, setData] = useState<Authorization[]>([]);
 
   const { t } = useTranslation();
 
@@ -14,18 +14,14 @@ export const useApiSettings = () => {
     fetchDataFromBackend();
   }, []);
   
-  const handleEdit = (record: DataType) => {
+  const handleEdit = (record: Authorization) => {
     setCurrentItem(record);
     setIsOpen(true);
   };
-
-  const handleDelete = (id: string) => {
-    console.log(`Excluir item com ID: ${id}`);
-  };
-
+  
   const fetchDataFromBackend = async () => {
     const response = await getDataService([]);
-    setData(response as SetStateAction<DataType[]>);
+    setData(response as SetStateAction<Authorization[]>);
   };
 
   const closeModal = () => {
@@ -34,15 +30,7 @@ export const useApiSettings = () => {
     fetchDataFromBackend();
   };
 
-  const deleteAll = (arrayIds: any = []) => {
-    console.log(arrayIds);
-    // Lógica para excluir todos os itens
-    console.log('Excluir todos os itens');
-  };
-
   const openModal = () => {
-    console.log('action');
-    //if (id) setCurrentItem(null);
     setIsOpen(true);
   };
 
@@ -52,9 +40,7 @@ export const useApiSettings = () => {
     data,
     t,
     handleEdit,
-    handleDelete,
     closeModal,
-    deleteAll,
     openModal,
   };
 };

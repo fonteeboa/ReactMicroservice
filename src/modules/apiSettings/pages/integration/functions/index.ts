@@ -1,14 +1,18 @@
 import { useState, useEffect, SetStateAction } from 'react';
-import { getData as getDataService, getSelectDataService } from '../../../services/pages/integration/integrationPageService';
+import { 
+  getData as getDataService, getSelectDataService, 
+  deleteData as deleteDataService, 
+  deleteAll as deleteAllService
+} from '../../../services/pages/integration/integrationPageService';
 import { useTranslation } from 'react-i18next';
-import { DataType } from '../../../domain';
+import { Integration } from '../../../domain';
 
 export const useApiSettings = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentItem, setCurrentItem] = useState<DataType | null>(null);
-  const [data, setData] = useState<DataType[]>([]);
-  const [dataSelect, setSelectData] = useState<DataType[]>([]);
-
+  const [currentItem, setCurrentItem] = useState<Integration | null>(null);
+  const [data, setData] = useState<Integration[]>([]);
+  const [dataSelect, setSelectData] = useState<Integration[]>([]);
+  type T = Integration;
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -18,22 +22,23 @@ export const useApiSettings = () => {
   
 
   const fetchDataFromBackend = async () => {
-    const response = await getDataService([]);
-    setData(response as SetStateAction<DataType[]>);
+    const response = await getDataService();
+    setData(response as SetStateAction<Integration[]>);
   };
 
   const fetchDataSelectOptions = async () => {
     const response = await getSelectDataService();
-    setSelectData(response as SetStateAction<DataType[]>);
+    setSelectData(response as SetStateAction<Integration[]>);
   }
 
-  const handleEdit = (record: DataType) => {
+  const handleEdit = (record: Integration) => {
     setCurrentItem(record);
     setIsOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    console.log(`Excluir item com ID: ${id}`);
+  const handleDelete = (record: Integration) => {
+    deleteDataService(record);
+    fetchDataFromBackend();
   };
 
   const closeModal = () => {
@@ -42,15 +47,12 @@ export const useApiSettings = () => {
     fetchDataFromBackend();
   };
 
-  const deleteAll = (arrayIds: any = []) => {
-    console.log(arrayIds);
-    // Lógica para excluir todos os itens
-    console.log('Excluir todos os itens');
+  const deleteAll = (arrayIds: T[] = []) => {
+    deleteAllService(arrayIds);
+    fetchDataFromBackend();
   };
 
   const openModal = () => {
-    console.log('action');
-    //if (id) setCurrentItem(null);
     setIsOpen(true);
   };
 

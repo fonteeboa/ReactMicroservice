@@ -6,15 +6,15 @@ import type { ColumnsType } from 'antd/es/table';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import type { DataType } from '../../domain';
+import type { Integration } from '../../domain';
 
 const ItgSettings: React.FC = () => {
   const { isOpen, currentItem, data, dataSelect, t, closeModal, deleteAll, openModal, handleEdit, handleDelete} = useApiSettings();
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<Integration> = [
     {
       title: t('common.name'),
-      dataIndex: 'ApiID',
+      dataIndex: 'AuthorizationName',
       render: (text) => <p>{text}</p>,
     },
     {
@@ -24,11 +24,16 @@ const ItgSettings: React.FC = () => {
     {
       title: t('common.actions'),
       render: (record) => (<>
-          <Button icon={<FontAwesomeIcon icon={faEdit} />} onClick={() => handleEdit(record.key)} />
-          <Button icon={<FontAwesomeIcon icon={faTrash} />} onClick={() => handleDelete(record.key)} />
+          <Button icon={<FontAwesomeIcon icon={faEdit} />} onClick={() => handleEdit(record)} />
+          <Button icon={<FontAwesomeIcon icon={faTrash} />} onClick={() => handleDelete(record)} />
       </>),
     },
   ];
+
+  const transformedData = data.map(item => ({
+    ...item,
+    AuthorizationName: item.Authorization.Name,
+  }));
 
   return (
     <>
@@ -36,7 +41,7 @@ const ItgSettings: React.FC = () => {
       
       <DynamicTable
         rowSelectionBoolean={true}
-        dataSource={data}
+        dataSource={transformedData}
         columns={columns}
         deleteAction={deleteAll}
         openModalAction={openModal}
