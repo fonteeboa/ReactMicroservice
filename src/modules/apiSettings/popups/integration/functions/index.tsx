@@ -1,9 +1,10 @@
+import React from 'react';
 import { processData } from '../../../services/popup/integration/integrationPopupService.tsx';
 import { Integration } from '../../../domain';
 
-export const useAuthPopup = (closeModal: any, data: Integration[]) => {
+export const useAuthPopup = (closeModal: () => void, data: Integration[]) => {
 
-  const handleSaveData = async (values : any) => {
+  const handleSaveData = async (values: Integration) => {
       await processData(values);
       closeModal();
   };

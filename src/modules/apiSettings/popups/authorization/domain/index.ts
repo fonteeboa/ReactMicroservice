@@ -1,4 +1,6 @@
+import { Authorization } from "../../../domain";
+
 export type AuthPopupType = {
     closeModal: () => void;
-    currentItem: any;
+    currentItem: Authorization | null;
 };

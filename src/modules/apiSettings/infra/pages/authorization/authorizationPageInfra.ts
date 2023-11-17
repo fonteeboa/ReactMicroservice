@@ -16,27 +16,6 @@ export const checkMicroservice = async (): Promise<boolean> => {
  * @param {any} data - The data to be sent to the API.
  * @return {void} No return value.
  */
-export const getData = async (data: any) => {
-    return await getService({ baseUrl: baseURL, route: '/auth', body: data });
-};
-
-export const deleteData = async (data: any) => {
-    console.log(data);
-    /*
-    try {
-        const response = await api.request({
-            method: 'delete', // Assuming it's a DELETE request
-            url: '/api/data',
-            data: data,
-            baseUrl: baseURL
-        });
-        // Process the response as needed
-        console.log(response);
-        return response; // You can return the response if needed
-    } catch (error) {
-        // Handle the error
-        console.error(error);
-        return false; // Return false in case of an error
-    }
-    */
+export const getData = async () => {
+    return await getService({ baseUrl: baseURL, route: '/auth' });
 };

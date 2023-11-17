@@ -15,12 +15,6 @@ export const useApiSettings = () => {
   type T = Integration;
   const { t } = useTranslation();
 
-  useEffect(() => {
-    fetchDataFromBackend();
-    fetchDataSelectOptions();
-  }, []);
-  
-
   const fetchDataFromBackend = async () => {
     const response = await getDataService();
     setData(response as SetStateAction<Integration[]>);
@@ -41,10 +35,10 @@ export const useApiSettings = () => {
     fetchDataFromBackend();
   };
 
-  const closeModal = () => {
+  const closeModal = async () => {
     setCurrentItem(null);
     setIsOpen(false);
-    fetchDataFromBackend();
+    await fetchDataFromBackend();
   };
 
   const deleteAll = (arrayIds: T[] = []) => {
@@ -56,16 +50,10 @@ export const useApiSettings = () => {
     setIsOpen(true);
   };
 
-  return {
-    isOpen,
-    currentItem,
-    data,
-    dataSelect,
-    t,
-    handleEdit,
-    handleDelete,
-    closeModal,
-    deleteAll,
-    openModal,
-  };
+  useEffect(() => {
+    fetchDataFromBackend();
+    fetchDataSelectOptions();
+  }, []);
+  
+  return { isOpen, currentItem, data, dataSelect, t, handleEdit, handleDelete, closeModal, deleteAll, openModal };
 };

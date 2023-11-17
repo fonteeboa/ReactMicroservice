@@ -6,7 +6,7 @@ import type { Authorization } from '../../domain';
 import AuthPopup from '../../popups/authorization/authorizationPopup';
 
 const AuthSettings: React.FC = () => {
-  const { isOpen, currentItem, data, t, closeModal, openModal} = useApiSettings();
+  const { isOpen, currentItem, data, t, closeModal, openModal } = useApiSettings();
 
   const columns: ColumnsType<Authorization> = [
     {

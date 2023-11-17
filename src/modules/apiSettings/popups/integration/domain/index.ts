@@ -2,6 +2,6 @@ import { Integration } from '../../../domain';
 
 export type ItgPopupType = {
     closeModal: () => void;
-    currentItem: any;
+    currentItem: Integration | null;
     data: Integration[];
 };

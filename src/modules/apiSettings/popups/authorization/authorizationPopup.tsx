@@ -10,8 +10,8 @@ const AuthPopup: React.FC<AuthPopupType> = ({ closeModal, currentItem }) => {
   
   const fields = [
     { label: 'ID', name: 'ID', type: 'hidden' },
-    { label: t('common.name'), name: 'Name', rules : [{ required: true, message: t("common.required.field") }]},
-    { label: t('common.description'), name: 'Description', type: 'area', rules : [{ required: true, message: t("common.required.field") }] }
+    { label: t('common.name'), name: 'Name', rules: [{ required: true, message: t("common.required.field") }] },
+    { label: t('common.description'), name: 'Description', type: 'area', rules: [{ required: true, message: t("common.required.field") }] }
   ];
   return (
     <>

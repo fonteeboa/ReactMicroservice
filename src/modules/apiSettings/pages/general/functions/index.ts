@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 /**
  * Returns the settings for the Pages API.
  *
- * @return {{ isMicroserviceAvailable: boolean, t: any }} The settings for the Pages API, including the availability of the microservice and the translation function.
+ * @return The settings for the Pages API, including the availability of the microservice and the translation function.
  */
 export const usePagesApiSettings = () => {
   const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(false);

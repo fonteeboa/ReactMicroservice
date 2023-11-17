@@ -12,7 +12,7 @@ const ItgPopup: React.FC<ItgPopupType> = ({ closeModal, currentItem, data }) => 
     { label: 'ID', name: 'ID', type: 'hidden' },
     { name: "doublelines",
       doublelines: [
-        { label: t('common.name'), name: 'ApiID', type:'select', optionsFunction: renderOptionsApiName },
+        { label: t('common.name'), name: 'ApiID', type: 'select', optionsFunction: renderOptionsApiName },
         { label: t('common.key'), name: 'ApiKey' },
       ]
     },

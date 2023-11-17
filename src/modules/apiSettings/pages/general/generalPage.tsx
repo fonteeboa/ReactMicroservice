@@ -1,13 +1,12 @@
 import React from 'react';
-import { Tabs, Card } from 'antd';
-import type { TabsProps } from 'antd';
+import { Tabs, Card, TabsProps } from 'antd';
 import DownloadMicroserviceScreenWithLoading from '../../../../common/components/layout/downloadMicroserviceScreenWithLoading/downloadMicroserviceScreenWithLoading';
 import { usePagesApiSettings } from './functions';
 import AuthSettings from '../authorization/authorizationPage';
 import ItgSettings from '../integration/integrationPage';
 
 const ApiConfigPages: React.FC = () => {
-  const { t, isMicroserviceAvailable, loading} = usePagesApiSettings();
+  const { t, isMicroserviceAvailable, loading } = usePagesApiSettings();
 
   const items: TabsProps['items'] = [
     {

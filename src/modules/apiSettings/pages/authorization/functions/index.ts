@@ -10,17 +10,13 @@ export const useApiSettings = () => {
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    fetchDataFromBackend();
-  }, []);
-  
   const handleEdit = (record: Authorization) => {
     setCurrentItem(record);
     setIsOpen(true);
   };
   
   const fetchDataFromBackend = async () => {
-    const response = await getDataService([]);
+    const response = await getDataService();
     setData(response as SetStateAction<Authorization[]>);
   };
 
@@ -33,6 +29,10 @@ export const useApiSettings = () => {
   const openModal = () => {
     setIsOpen(true);
   };
+
+  useEffect(() => {
+    fetchDataFromBackend();
+  }, []);
 
   return {
     isOpen,

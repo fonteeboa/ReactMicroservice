@@ -9,18 +9,12 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import type { Integration } from '../../domain';
 
 const ItgSettings: React.FC = () => {
-  const { isOpen, currentItem, data, dataSelect, t, closeModal, deleteAll, openModal, handleEdit, handleDelete} = useApiSettings();
-
+  const { isOpen, currentItem, data, dataSelect, t, closeModal, deleteAll, openModal, handleEdit, handleDelete } = useApiSettings();
   const columns: ColumnsType<Integration> = [
     {
-      title: t('common.name'),
-      dataIndex: 'AuthorizationName',
-      render: (text) => <p>{text}</p>,
+      title: t('common.name'), dataIndex: 'AuthorizationName', render: (text) => <p>{text}</p>,
     },
-    {
-      title: t('common.key'),
-      dataIndex: 'ApiKey',
-    },
+    { title: t('common.key'), dataIndex: 'ApiKey' },
     {
       title: t('common.actions'),
       render: (record) => (<>
@@ -30,10 +24,7 @@ const ItgSettings: React.FC = () => {
     },
   ];
 
-  const transformedData = data.map(item => ({
-    ...item,
-    AuthorizationName: item.Authorization.Name,
-  }));
+  const transformedData = data.map(item => ({ ...item, AuthorizationName: item.Authorization.Name }));
 
   return (
     <>

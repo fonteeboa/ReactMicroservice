@@ -1,0 +1,52 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+        "ecmaVersion": "latest",
+        "project": "./tsconfig.json" // Caminho para o seu arquivo tsconfig.json
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "solid"
+    ],
+    "settings": {
+        "react": {
+          "version": "detect"
+        }
+    },    
+    "rules": {
+        "camelcase": "error", 
+        "consistent-this": ["error", "self"], 
+        "func-names": "error", 
+        "no-magic-numbers": "error", 
+        "max-len": ["error", { "code": 200 }],
+        "object-curly-spacing": ["error", "always"], 
+        "key-spacing": ["error", { "beforeColon": false, "afterColon": true }], 
+        "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+        "lines-between-class-members": ["error", "always"],
+        "max-lines-per-function": ["error", { "max": 60 }], 
+        "no-duplicate-imports": "error",
+        "no-redeclare": "error",
+        "no-use-before-define": "error", 
+        "no-dupe-class-members": "error",
+        "no-dupe-keys": "error",
+        "no-duplicate-case": "error",
+        "no-dupe-else-if": "error",
+        "no-dupe-args": "error",
+        "no-unused-vars": "error",
+        "no-unused-expressions": "error",
+        "no-extra-semi": "error",
+        "@typescript-eslint/no-unnecessary-type-assertion": "error",
+        "complexity": ["error", 5],
+        "max-depth": ["error", 3],
+        "max-nested-callbacks": ["error", 2],
+        "max-params": ["error", 3],
+        "max-statements": ["error", 20],
+        "@typescript-eslint/no-explicit-any": "error"
+    }
+}

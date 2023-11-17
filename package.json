@@ -36,7 +36,9 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "jest --passWithNoTests --no-cache",
-    "test:coverage": "jest --coverage --coverageReporters=json-summary && jest-coverage-to-csv"
+    "test:coverage": "jest --coverage --coverageReporters=json-summary && jest-coverage-to-csv",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint-fix": "eslint . --ext .ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +68,7 @@
     "@types/react-modal": "^3.16.1",
     "babel-jest": "^29.7.0",
     "core-js": "^3.33.0",
+    "eslint-plugin-solid": "^0.13.0",
     "esm": "^3.2.25",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
