@@ -15,10 +15,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'pt', // Idioma padrão
-    fallbackLng: 'pt', // Idioma de fallback
+    lng: 'pt',
+    fallbackLng: 'pt',
     interpolation: {
-      escapeValue: false, // Não escape strings traduzidas
+      escapeValue: false,
     },
   });
 

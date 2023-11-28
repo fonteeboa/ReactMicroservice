@@ -37,8 +37,9 @@
     "eject": "react-scripts eject",
     "test": "jest --passWithNoTests --no-cache",
     "test:coverage": "jest --coverage --coverageReporters=json-summary && jest-coverage-to-csv",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint-fix": "eslint . --ext .ts,.tsx --fix"
+    "lint": "eslint .",
+    "lint-fix": "eslint . --ext .ts,.tsx --fix",
+    "lint-report": "eslint --format=json --output-file=eslint-report.json"
   },
   "eslintConfig": {
     "extends": [
