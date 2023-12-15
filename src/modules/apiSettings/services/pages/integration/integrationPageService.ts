@@ -7,14 +7,6 @@ import {
 } from '../../../infra/pages/integration/integrationPageInfra';
 import { Integration } from '../../../domain/'
 
-/**
- * Checks the microservice by calling the checkMicroserviceInfra function.
- *
- * @return {Promise<boolean>} A Promise that resolves to a boolean indicating whether the microservice check is successful.
- */
-export const checkMicroservice = async (): Promise<boolean> => {
-    return checkMicroserviceInfra();
-}
 
 /**
  * Retrieves data using the provided input and logs the response.

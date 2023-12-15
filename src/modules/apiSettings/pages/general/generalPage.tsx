@@ -27,7 +27,7 @@ const ApiConfigPages: React.FC = () => {
         <Tabs defaultActiveKey="1" items={items} />
       </Card>
     :
-     <DownloadMicroserviceScreenWithLoading loading={loading} microserviceName={t("common.api_settings")} downloadUrl="https://github.com/galvao845/go-api-settings" />
+     <DownloadMicroserviceScreenWithLoading loading={loading} microserviceName={t("common.api_settings")} downloadUrl="https://github.com/fonteeboa/go-api-settings" />
     }
   </>)
 }

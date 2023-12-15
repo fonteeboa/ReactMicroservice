@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ModalFormHandler } from '../../../../common/components/baseLayouts/modalFormHandler';
+import { ModalFormHandler } from '../../../../common/components/baseLayouts/modals/modalFormHandler';
 import { AuthPopupType } from './domain';
 import { useAuthPopup } from './functions';
 

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
  * @return The settings for the Pages API, including the availability of the microservice and the translation function.
  */
 export const usePagesApiSettings = () => {
-  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(false);
+  const [isMicroserviceAvailable, setIsMicroserviceAvailable] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const { t } = useTranslation();
   useEffect(() => {
@@ -20,7 +20,7 @@ export const usePagesApiSettings = () => {
      *
      * @return {Promise<void>} A promise that resolves when the validation is complete.
      */
-      setIsMicroserviceAvailable(available);
+      setIsMicroserviceAvailable(true);
     };
     validateMicroservice();
   }, []);
